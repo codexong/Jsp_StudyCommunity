@@ -184,17 +184,21 @@ public class RecordController extends HttpServlet {
 	}
 	
 	// 해당 사용자의 id로 총 공부시간 가져오기 
-	public void requestTotalStudyTime(HttpServletRequest request) {
-	    RecordDAO dao = RecordDAO.getInstance();
-	    RecordDTO record = new RecordDTO();
-	    
-	    int totalStudyTime = dao.getTotalStudyTime();
-	   
-	    record.setId(request.getParameter("id"));
+	 public void requestTotalStudyTime(HttpServletRequest request) {
+	        RecordDAO dao = RecordDAO.getInstance();
+	        RecordDTO record = new RecordDTO();
 
-	    request.setAttribute("total_study_time", totalStudyTime);
-	    request.setAttribute("record", record); 
-	   
-	}
+	        String id = request.getParameter("id"); // Get the user's id from the request
+
+	        int totalStudyTime = dao.getTotalStudyTimeForUser(id); // Get total study time for the user
+
+	        record.setId(id);
+	        
+
+
+	        request.setAttribute("total_study_time", totalStudyTime);
+	        request.setAttribute("record", record);
+	        
+	    }
 
 }

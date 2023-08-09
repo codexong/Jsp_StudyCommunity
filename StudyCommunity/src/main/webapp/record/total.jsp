@@ -17,12 +17,18 @@
 	<jsp:include page="/login_nav.jsp"/>
 	<jsp:include page="/main_nav.jsp"/>
 	
-    <div>
-        <h1><%=record.getId()%> 님의 총 공부 시간</h1>
+    <div align="center" style="margin-top: 100px; margin-bottom: 100px">
+        
+      	<c:set var="total" value="${total_study_time}" />
         <c:set var="hours" value="${total_study_time / 60}" />
         <c:set var="minutes" value="${total_study_time % 60}" />
-        <p>총 공부 시간은 <c:out value="${hours}"/>시간 <c:out value="${minutes}"/>분입니다.</p>
+        <h1><%=record.getId()%> 님의 총 공부 시간은 </h1>
+   		<h1>${hours.intValue()}시간 ${minutes.intValue()}분입니다.</h1>
+   		
+   		
     </div>
+       		<h3 align="center" style="background-color: #F8F9FA">오늘도 수고하셨습니다.</h3>
+    
     
     <jsp:include page="/footer.jsp"/>
 </body>

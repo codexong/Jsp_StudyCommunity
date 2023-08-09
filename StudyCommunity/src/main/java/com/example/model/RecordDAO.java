@@ -299,34 +299,31 @@ public class RecordDAO {
 	}
 	
 	//토탈 공부시간 조회하기
-	public int getTotalStudyTime() {
-		
+	public int getTotalStudyTimeForUser(String id) {
 	    Connection conn = null;
 	    PreparedStatement pstmt = null;
 	    ResultSet rs = null;
-	    RecordDTO record = null;
 	   
 	    int total = 0;
-	    
-	    String sql = "SELECT study_time FROM record WHERE id = ?";
 
 	    try {
-	        conn = DBConnection.getConnection();  
+	        conn = DBConnection.getConnection();
+
+	        String sql = "SELECT study_time FROM record WHERE id = ?";
+
 	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setString(1, id);
+
 	        rs = pstmt.executeQuery();
 
 	        while (rs.next()) {
-	        	record = new RecordDTO();
-				record.setId(rs.getString("id"));
-				String studyTimeStr = rs.getString("study_time");
+	            String studyTimeStr = rs.getString("study_time");
 	            LocalTime studyTime = LocalTime.parse(studyTimeStr, DateTimeFormatter.ofPattern("HH:mm"));
-	            record.setStudy_time(studyTime);
-	            
 	            total += studyTime.getHour() * 60 + studyTime.getMinute(); // 분 단위로 합산
 	        }
 	        
 	    } catch (Exception ex) {
-	        System.out.println("getTotalStudyTime() 에러 : " + ex);
+	        System.out.println("getTotalStudyTimeForUser() 에러 : " + ex);
 	    } finally {
 	        try {
 	            if (rs != null) {
@@ -339,7 +336,7 @@ public class RecordDAO {
 	                conn.close();
 	            }
 	        } catch (SQLException ex) {
-	            System.out.println("getTotalStudyTime() 에러 : " + ex);
+	            System.out.println("getTotalStudyTimeForUser() 에러 : " + ex);
 	        }
 	    }
 	    return total;

@@ -16,7 +16,7 @@
 	<%@ include file="main_nav.jsp" %>
 
 		<div class="card mb-3">
-			<img src="<%=request.getContextPath()%>/resources/img/home.jpg"  class="card-img-top" style=" height:400px; opacity: 0.7; margin: auto;">
+			<img src="<%=request.getContextPath()%>/resources/img/home.jpg"  class="card-img-top" style=" height:700px; opacity: 0.7; margin: auto;">
 			<div class="card-img-overlay">
 			<div class="card-body" style="text-align:left;">
 			      <% response.setIntHeader("Refresh", 5);
